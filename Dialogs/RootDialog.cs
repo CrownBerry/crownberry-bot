@@ -2,7 +2,9 @@
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using Chronic.Handlers;
 using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Builder.Luis;
 using Microsoft.Bot.Builder.Luis.Models;
 using Microsoft.Bot.Connector;
 
@@ -20,6 +22,11 @@ namespace CrownberryBot.Dialogs
             "видюх", "видеокарт",
             "btc", "bitcoin"
         };
+
+        public RootDialog() : base(new LuisService(new LuisModelAttribute("605c612f-5aef-4c13-9149-9d9b41627ec5",
+            "4e3011e930d94975a588111368fbdfff")))
+        {
+        }
 
         public Task StartAsync(IDialogContext context)
         {
