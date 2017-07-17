@@ -36,10 +36,17 @@ namespace CrownberryBot.Dialogs
             return Task.CompletedTask;
         }
 
+        [LuisIntent("None")]
+        public async Task NoneTaskAsync(IDialogContext context, LuisResult result)
+        {
+            await context.PostAsync($"{result.Query}");
+            context.Wait(MessageReceived);
+        }
+
         [LuisIntent("Places.FindPlace")]
         public async Task PlacesTaskAsync(IDialogContext context, LuisResult result)
         {
-            await context.PostAsync($"{result.Intents[0]}");
+            await context.PostAsync($"{result.Query}");
             context.Wait(MessageReceived);
         }
 
