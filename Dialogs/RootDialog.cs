@@ -43,6 +43,11 @@ namespace CrownberryBot.Dialogs
                             await context.PostAsync(
                                 $"Hello, {activity.From.Name}. Type \"btc\" if u want to know current BTC-USD rate.");
                             break;
+                        case "/weather@crownberry_bot":
+                            var isCity = LuisParser.GetCity(textList[1]);
+                            if (isCity != "No city")
+                                await context.PostAsync($"Вы упомянули город {isCity}. Скоро я научусь вам говорить погоду в этом городе");
+                            break;
                         default:
                             if (BtcMatches.Any(e => culture
                                                         .CompareInfo
@@ -53,9 +58,6 @@ namespace CrownberryBot.Dialogs
                                 var resp = string.Format(ResponseString, btc, eth);
                                 await context.PostAsync(resp);
                             }
-                            var isCity = LuisParser.GetCity(activity.Text);
-                            if (isCity != "No city")
-                                await context.PostAsync($"Вы упомянули город {isCity}. Скоро я научусь вам говорить погоду в этом городе");
                             break;
                     }
                 }
