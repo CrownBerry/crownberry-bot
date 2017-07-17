@@ -26,6 +26,7 @@ namespace CrownberryBot.Dialogs
         public RootDialog() : base(new LuisService(new LuisModelAttribute("605c612f-5aef-4c13-9149-9d9b41627ec5",
             "4e3011e930d94975a588111368fbdfff")))
         {
+
         }
 
         public Task StartAsync(IDialogContext context)
@@ -35,7 +36,7 @@ namespace CrownberryBot.Dialogs
             return Task.CompletedTask;
         }
 
-        [LuisIntent("Places")]
+        [LuisIntent("PlacesIntent")]
         public async Task PlacesTaskAsync(IDialogContext context, LuisResult result)
         {
             await context.PostAsync($"{result.Intents[0]}");
