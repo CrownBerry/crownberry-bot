@@ -45,7 +45,7 @@ namespace CrownberryBot.Dialogs
                             break;
                         case "/weather":
                         case "/weather@crownberry_bot":
-                            var isCity = LuisParser.GetCity(textList[1]);
+                            //var isCity = LuisParser.GetCity(textList[1]);
                             var fullJson = LuisParser.GetFullJson(textList[1]);
                             await context.PostAsync(fullJson);
                             //if (isCity != "No city")
