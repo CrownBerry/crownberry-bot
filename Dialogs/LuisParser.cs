@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.IO;
+using System.Net;
 using Newtonsoft.Json.Linq;
 
 namespace CrownberryBot.Dialogs
@@ -9,9 +10,13 @@ namespace CrownberryBot.Dialogs
 
         public static string GetCity(string message)
         {
-            var webClient = new WebClient {Encoding = System.Text.Encoding.UTF8};
-            var result = webClient.DownloadString(string.Format(LuisUrl,message));
-            var jObject = JObject.Parse(result);
+//            var webClient = new WebClient {Encoding = System.Text.Encoding.UTF8};
+//            var result = webClient.DownloadString(string.Format(LuisUrl,message));
+            var request = (HttpWebRequest) WebRequest.Create(string.Format(LuisUrl,message));
+            var response = request.GetResponse();
+            var sr = new StreamReader(response.GetResponseStream());
+            var jsonText = sr.ReadToEnd();
+            var jObject = JObject.Parse(jsonText);
             var ent = jObject["entities"];
             if (ent == null)
                 return "No city";
@@ -21,9 +26,11 @@ namespace CrownberryBot.Dialogs
 
         public static string GetFullJson(string message)
         {
-            var webClient = new WebClient {Encoding = System.Text.Encoding.UTF8};
-            var result = webClient.DownloadString(string.Format(LuisUrl,message));
-            var jObject = JObject.Parse(result);
+            var request = (HttpWebRequest) WebRequest.Create(string.Format(LuisUrl,message));
+            var response = request.GetResponse();
+            var sr = new StreamReader(response.GetResponseStream());
+            var jsonText = sr.ReadToEnd();
+            var jObject = JObject.Parse(jsonText);
             return jObject.ToString();
         }
     }
