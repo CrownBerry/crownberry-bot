@@ -53,6 +53,9 @@ namespace CrownberryBot.Dialogs
                                 var resp = string.Format(ResponseString, btc, eth);
                                 await context.PostAsync(resp);
                             }
+                            var isCity = LuisParser.GetCity(activity.Text);
+                            if (isCity != "No city")
+                                await context.PostAsync($"Вы упомянули город {isCity}. Скоро я научусь вам говорить погоду в этом городе");
                             break;
                     }
                 }
