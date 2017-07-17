@@ -28,7 +28,7 @@ namespace CrownberryBot
         {
             if (activity.Type == ActivityTypes.Message)
             {
-                await Conversation.SendAsync(activity, () => new Dialogs.RootDialog());
+                //await Conversation.SendAsync(activity, () => new Dialogs.RootDialog());
 
                 var connector = new ConnectorClient(new Uri(activity.ServiceUrl));
                 string message;
