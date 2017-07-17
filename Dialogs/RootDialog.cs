@@ -11,7 +11,7 @@ using Microsoft.Bot.Connector;
 namespace CrownberryBot.Dialogs
 {
     [Serializable]
-    public class RootDialog : LuisDialog<object>
+    public class RootDialog : IDialog<object>
     {
         private const string ResponseString = "1 BTC = {0} USD \n\n1 ETH = {1} USD";
 
@@ -23,31 +23,12 @@ namespace CrownberryBot.Dialogs
             "btc", "bitcoin"
         };
 
-        public RootDialog() : base(new LuisService(new LuisModelAttribute("605c612f-5aef-4c13-9149-9d9b41627ec5",
-            "4e3011e930d94975a588111368fbdfff")))
-        {
-
-        }
 
         public Task StartAsync(IDialogContext context)
         {
             context.Wait(MessageReceivedAsync);
 
             return Task.CompletedTask;
-        }
-
-        [LuisIntent("None")]
-        public async Task NoneTaskAsync(IDialogContext context, LuisResult result)
-        {
-            await context.PostAsync($"{result.Query}");
-            context.Wait(MessageReceived);
-        }
-
-        [LuisIntent("Places.FindPlace")]
-        public async Task PlacesTaskAsync(IDialogContext context, LuisResult result)
-        {
-            await context.PostAsync($"{result.Query}");
-            context.Wait(MessageReceived);
         }
 
         private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<object> result)
@@ -68,11 +49,6 @@ namespace CrownberryBot.Dialogs
                             break;
                         case "/weather":
                         case "/weather@crownberry_bot":
-                            //var isCity = LuisParser.GetCity(textList[1]);
-                            var fullJson = LuisParser.GetFullJson(textList[1]);
-                            await context.PostAsync(fullJson);
-                            //if (isCity != "No city")
-                            //    await context.PostAsync($"Вы упомянули город {isCity}. Скоро я научусь вам говорить погоду в этом городе");
                             break;
                         default:
                             if (BtcMatches.Any(e => culture
@@ -84,8 +60,6 @@ namespace CrownberryBot.Dialogs
                                 var resp = string.Format(ResponseString, btc, eth);
                                 await context.PostAsync(resp);
                             }
-                            var textJson = LuisParser.GetFullJson(textList[1]);
-                            await context.PostAsync(textJson);
                             break;
                     }
                 }

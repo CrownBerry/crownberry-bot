@@ -146,8 +146,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Dialogs\CoinRate.cs" />
-    <Compile Include="Dialogs\GoogleTranslator.cs" />
-    <Compile Include="Dialogs\LuisParser.cs" />
     <Compile Include="Dialogs\RootDialog.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
