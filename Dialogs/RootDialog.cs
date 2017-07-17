@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Builder.Luis.Models;
 using Microsoft.Bot.Connector;
 
 namespace CrownberryBot.Dialogs
@@ -25,6 +26,13 @@ namespace CrownberryBot.Dialogs
             context.Wait(MessageReceivedAsync);
 
             return Task.CompletedTask;
+        }
+
+        [LuisIntent("Places")]
+        public async Task PlacesTaskAsync(IDialogContext context, LuisResult result)
+        {
+            await context.PostAsync($"{result.Intents[0]}");
+            context.Wait(MessageReceived);
         }
 
         private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<object> result)
