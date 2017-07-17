@@ -41,7 +41,7 @@ namespace CrownberryBot.Dialogs
                     switch (textList[0])
                     {
                         case "/help":
-                            await context.PostAsync($"Hello, {activity.From.Name}. There is nothing for you now.");
+                            await context.PostAsync($"Hello, {activity.From.Name}. Type \"btc\" if u want to know current BTC-USD rate.");
                             break;
                         default:
                             if (btcMatches.Where(e =>
