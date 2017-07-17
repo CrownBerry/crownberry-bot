@@ -18,5 +18,13 @@ namespace CrownberryBot.Dialogs
             var cityName = ent[0]["entity"].ToString();
             return cityName;
         }
+
+        public static string GetFullJson(string message)
+        {
+            var webClient = new WebClient {Encoding = System.Text.Encoding.UTF8};
+            var result = webClient.DownloadString(string.Format(LuisUrl,message));
+            var jObject = JObject.Parse(result);
+            return jObject.ToString();
+        }
     }
 }

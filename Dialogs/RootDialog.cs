@@ -45,8 +45,10 @@ namespace CrownberryBot.Dialogs
                             break;
                         case "/weather@crownberry_bot":
                             var isCity = LuisParser.GetCity(textList[1]);
-                            if (isCity != "No city")
-                                await context.PostAsync($"Вы упомянули город {isCity}. Скоро я научусь вам говорить погоду в этом городе");
+                            var fullJson = LuisParser.GetFullJson(textList[1]);
+                            await context.PostAsync(fullJson);
+                            //if (isCity != "No city")
+                            //    await context.PostAsync($"Вы упомянули город {isCity}. Скоро я научусь вам говорить погоду в этом городе");
                             break;
                         default:
                             if (BtcMatches.Any(e => culture
