@@ -10,6 +10,7 @@ using Microsoft.Bot.Connector;
 
 namespace CrownberryBot.Dialogs
 {
+
     [Serializable]
     public class RootDialog : IDialog<object>
     {
