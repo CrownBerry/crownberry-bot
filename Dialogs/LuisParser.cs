@@ -1,5 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net;
+using System.Runtime.Remoting.Messaging;
 using Newtonsoft.Json.Linq;
 
 namespace CrownberryBot.Dialogs
@@ -26,12 +28,20 @@ namespace CrownberryBot.Dialogs
 
         public static string GetFullJson(string message)
         {
-            var request = (HttpWebRequest) WebRequest.Create(string.Format(LuisUrl,message));
-            var response = request.GetResponse();
-            var sr = new StreamReader(response.GetResponseStream());
-            var jsonText = sr.ReadToEnd();
-            var jObject = JObject.Parse(jsonText);
-            return jObject.ToString();
+            try
+            {
+                var request = (HttpWebRequest) WebRequest.Create(string.Format(LuisUrl, message));
+                var response = request.GetResponse();
+                var sr = new StreamReader(response.GetResponseStream());
+                var jsonText = sr.ReadToEnd();
+                var jObject = JObject.Parse(jsonText);
+                return jObject.ToString();
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+
         }
     }
 }
