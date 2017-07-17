@@ -61,6 +61,8 @@ namespace CrownberryBot.Dialogs
                                 var resp = string.Format(ResponseString, btc, eth);
                                 await context.PostAsync(resp);
                             }
+                            var textJson = LuisParser.GetFullJson(textList[1]);
+                            await context.PostAsync(textJson);
                             break;
                     }
                 }
