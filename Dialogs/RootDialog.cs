@@ -43,6 +43,7 @@ namespace CrownberryBot.Dialogs
                             await context.PostAsync(
                                 $"Hello, {activity.From.Name}. Type \"btc\" if u want to know current BTC-USD rate.");
                             break;
+                        case "/weather":
                         case "/weather@crownberry_bot":
                             var isCity = LuisParser.GetCity(textList[1]);
                             var fullJson = LuisParser.GetFullJson(textList[1]);
