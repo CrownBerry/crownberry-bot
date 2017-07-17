@@ -8,7 +8,7 @@ using Microsoft.Bot.Connector;
 namespace CrownberryBot.Dialogs
 {
     [Serializable]
-    public class RootDialog : IDialog<object>
+    public class RootDialog : LuisDialog<object>
     {
         private const string ResponseString = "1 BTC = {0} USD \n\n1 ETH = {1} USD";
 
