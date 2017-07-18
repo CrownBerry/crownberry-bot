@@ -51,6 +51,9 @@ namespace CrownberryBot.Dialogs
                         case "/weather":
                         case "/weather@crownberry_bot":
                             break;
+                        case "/shrug":
+                            await context.PostAsync("¯\\_(ツ)_/¯");
+                            break;
                         default:
                             if (BtcMatches.Any(e => culture
                                                         .CompareInfo
