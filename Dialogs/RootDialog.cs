@@ -46,7 +46,7 @@ namespace CrownberryBot.Dialogs
                         case "/help":
                         case "/help@crownberry_bot":
                             await context.PostAsync(
-                                $"Hello, {activity.From.Name}. Type \"btc\" if u want to know current BTC-USD rate.");
+                                $"Hello, {activity.From.Name}. Type \"btc\" if u wanna know current BTC-USD rate.");
                             break;
                         case "/weather":
                         case "/weather@crownberry_bot":
