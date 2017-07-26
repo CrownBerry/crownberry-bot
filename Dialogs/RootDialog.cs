@@ -24,6 +24,16 @@ namespace CrownberryBot.Dialogs
             "btc", "bitcoin"
         };
 
+        private static readonly string[] NoMathces =
+        {
+            "нет"
+        };
+
+        private static readonly string[] PatMathces =
+        {
+            "жаль"
+        };
+
 
         public Task StartAsync(IDialogContext context)
         {
@@ -48,12 +58,6 @@ namespace CrownberryBot.Dialogs
                             await context.PostAsync(
                                 $"Hello, {activity.From.Name}. Type \"btc\" if u wanna know current BTC-USD rate.");
                             break;
-                        case "/weather":
-                        case "/weather@crownberry_bot":
-                            break;
-                        case "/shrug":
-                            await context.PostAsync(@"¯\_(ツ)_/¯");
-                            break;
                         default:
                             if (BtcMatches.Any(e => culture
                                                         .CompareInfo
@@ -62,6 +66,21 @@ namespace CrownberryBot.Dialogs
                                 var btc = CoinRate.GetRate("btc");
                                 var eth = CoinRate.GetRate("eth");
                                 var resp = string.Format(ResponseString, btc, eth);
+                                await context.PostAsync(resp);
+                            }
+                            else if (NoMathces.Any(e => culture
+                                                         .CompareInfo
+                                                         .IndexOf(activity.Text, e, CompareOptions.IgnoreCase) >= 0))
+                            {
+                                var resp = "Догадайся кого ответ KappaPride";
+                                await context.PostAsync(resp);
+                            }
+                            else if (PatMathces.Any(e => culture
+                                                         .CompareInfo
+                                                         .IndexOf(activity.Text, e, CompareOptions.IgnoreCase) >= 0))
+                            {
+                                var resp = "И мне тебя жаль" +
+                                           "";
                                 await context.PostAsync(resp);
                             }
                             break;
