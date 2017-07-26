@@ -26,12 +26,12 @@ namespace CrownberryBot.Dialogs
 
         private static readonly string[] NoMathces =
         {
-            "нет"
+            "нет "
         };
 
         private static readonly string[] PatMathces =
         {
-            "жаль"
+            "жаль "
         };
 
 
